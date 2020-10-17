@@ -1,0 +1,21 @@
+{
+    "name": "whats-that-word",
+    "version": "1.0.0",
+    "description": "vocabulary sharing app",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon app"
+    },
+    "author": "hien hang",
+    "license": "ISC",
+    "dependencies": {
+        "bcryptjs": "*",
+        "body-parser": "*",
+        "cors": "*",
+        "express": "*",
+        "jsonwebtoken": "*",
+        "mongoose": "^5.10.8",
+        "passport": "*"
+    }
+}
