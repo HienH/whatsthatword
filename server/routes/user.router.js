@@ -9,6 +9,6 @@ const userController = require('../controller/user.controller')
 router.post('/register', userController.register);
 
 // playlist login
-// router.post('/login', (req res)userController.login);
+router.post('/login', userController.login);
 
 module.exports = router; 
