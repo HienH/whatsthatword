@@ -17,9 +17,9 @@ const userController = {
             if (!user) {
                 User.addUser(newUser, (err) => {
                     if (err) {
-                        res.json({ success: false, msg: 'Failed to register User' });
+                        res.json({ success: false, message: 'Failed to register User' });
                     } else {
-                        res.json({ success: true, msg: 'User registered' })
+                        res.json({ success: true, message: 'User registered' })
                     }
                 })
             } else {
@@ -61,7 +61,7 @@ const userController = {
                 } else {
                     res.json({
                         success: false,
-                        msg: 'Wrong password'
+                        message: 'Wrong password'
                     });
                 }
             })
