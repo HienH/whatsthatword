@@ -25,7 +25,7 @@ const userController = {
             } else {
                 res.status(409).json({
                     message: "Email name already exist",
-                    sucess: false
+                    success: false
                 })
             }
         });
@@ -35,10 +35,10 @@ const userController = {
         const email = req.body.email;
         const password = req.body.password;
 
-        User.findOne({ 'email': req.body.email }, (err, user) => {
+        User.findOne({ 'email': email }, (err, user) => {
             if (err) throw err;
             if (!user) return res.json({
-                loginSuccess: false,
+                success: false,
                 message: 'Email not found'
             })
 

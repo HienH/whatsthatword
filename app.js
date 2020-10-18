@@ -24,8 +24,11 @@ app.use(bodyParser.json());
 
 // Routers
 const userRouter = require('./server/routes/user.router');
+const wordRourer = require('./server/routes/word.router');
+
 
 app.use('/user', userRouter);
+app.use('/word', wordRourer);
 
 app.listen(port, () => {
     console.log(`server is running on port ${port}`)

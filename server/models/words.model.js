@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Word = mongoose.Schema({
+const WordSchema = mongoose.Schema({
     word: {
         type: String,
         require: true,
@@ -38,4 +38,4 @@ const Word = mongoose.Schema({
     },
 });
 
-const Word = module.exports = mongoose.model('Word', vocabularyWord);
+const Word = module.exports = mongoose.model('Word', WordSchema);
