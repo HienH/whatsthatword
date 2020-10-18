@@ -11,6 +11,8 @@ import { UserService } from './component/services/user.service';
 import { MatButtonModule } from '@angular/material/button';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './component/home/home.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
     declarations: [
@@ -28,6 +30,8 @@ import { HomeComponent } from './component/home/home.component';
         MatButtonModule,
         MDBBootstrapModule.forRoot(),
         NoopAnimationsModule,
+        MatIconModule,
+        MatInputModule
 
     ],
     providers: [UserService],
