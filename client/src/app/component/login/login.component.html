@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="!success && errorMessage" #alert class="alert alert-warning alert-dismissible fade show" role="alert">
+  <div *ngIf="errorMessage" #alert class="alert alert-warning alert-dismissible fade show" role="alert">
     <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
       <span aria-hidden="true">&times;</span>
     </button>

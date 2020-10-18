@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,7 @@ export class UserService {
         return this.http.post('http://localhost:3000/user/login', user, { headers: headers });
     }
 
-    storeUserData(token, user) {
+    storeUserData(token) {
         localStorage.setItem('jwt', token);
     }
 
@@ -22,5 +23,29 @@ export class UserService {
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
         return this.http.post('http://localhost:3000/user/register', user, { headers: headers });
+    }
+    isLoggedIn(): boolean {
+        const helper = new JwtHelperService();
+        let token = localStorage.getItem('jwt')
+        if (token) {
+            return !helper.isTokenExpired(token.split(' ')[1]);
+        } else false;
+    }
+
+    logout() {
+        localStorage.clear()
+    }
+
+    getToken() {
+        return localStorage.getItem('jwt')
+    }
+
+    getProfile() {
+        console.log('calling')
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            Authorization: this.getToken()
+        });
+        return this.http.get('http://localhost:3000/user/profile', { headers: headers })
     }
 }

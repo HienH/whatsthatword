@@ -26,6 +26,10 @@ app.use(bodyParser.json());
 const userRouter = require('./server/routes/user.router');
 const wordRourer = require('./server/routes/word.router');
 
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+require('./server/middleware/passport')(passport);
 
 app.use('/user', userRouter);
 app.use('/word', wordRourer);

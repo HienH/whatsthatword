@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
     submitted: boolean;
     validMessage: string;
     success: boolean;
-
+    hide = true;
     constructor(private userService: UserService, private router: Router) { }
 
     ngOnInit(): void {

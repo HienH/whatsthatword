@@ -67,6 +67,13 @@ const userController = {
             })
         })
     },
+
+    getUser(req, res) {
+        res.json({
+            success: true,
+            user: req.user
+        });
+    }
 }
 
 module.exports = userController;

@@ -40,7 +40,8 @@ export class LoginComponent implements OnInit {
             this.userService.loginUser(this.loginForm.value).subscribe(
                 (res) => {
                     if (res["success"]) {
-                        localStorage.setItem("token", res["token"]);
+                        this.userService.storeUserData(res['token'])
+
                         this.router.navigate(['/home']);
 
                     } else {

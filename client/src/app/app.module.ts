@@ -13,6 +13,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './component/home/home.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { AuthGuard } from './component/guard/auth.guard';
 
 @NgModule({
     declarations: [
@@ -34,7 +35,7 @@ import { MatInputModule } from '@angular/material/input';
         MatInputModule
 
     ],
-    providers: [UserService],
+    providers: [UserService, AuthGuard],
 
     bootstrap: [AppComponent]
 })
