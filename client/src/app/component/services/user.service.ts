@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Word } from '../models/word.model';
 
 @Injectable({
     providedIn: 'root'
@@ -41,11 +42,12 @@ export class UserService {
     }
 
     getProfile() {
-        console.log('calling')
         let headers = new HttpHeaders({
             'Content-Type': 'application/json',
             Authorization: this.getToken()
         });
         return this.http.get('http://localhost:3000/user/profile', { headers: headers })
     }
+
+
 }

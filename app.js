@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 // Routers
 const userRouter = require('./server/routes/user.router');
-const wordRourer = require('./server/routes/word.router');
+const wordRouter = require('./server/routes/word.router');
 
 // Passport Middleware
 app.use(passport.initialize());
@@ -32,7 +32,7 @@ app.use(passport.session());
 require('./server/middleware/passport')(passport);
 
 app.use('/user', userRouter);
-app.use('/word', wordRourer);
+app.use('/word', wordRouter);
 
 app.listen(port, () => {
     console.log(`server is running on port ${port}`)

@@ -1,1 +1,5 @@
-<h1> Hello {{user | json}}</h1>
+<input class="form-control" type="word" name="word" [(ngModel)]="word" class="form-control mb-4" placeholder="Word">
+
+<button (click)="addWord()" class="btn btn-danger">
+  Add
+</button>

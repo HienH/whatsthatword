@@ -8,6 +8,7 @@ import { RegisterComponent } from './component/register/register.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './component/services/user.service';
+import { WordService } from './component/services/word.service';
 import { MatButtonModule } from '@angular/material/button';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './component/home/home.component';
@@ -35,7 +36,7 @@ import { AuthGuard } from './component/guard/auth.guard';
         MatInputModule
 
     ],
-    providers: [UserService, AuthGuard],
+    providers: [UserService, WordService, AuthGuard],
 
     bootstrap: [AppComponent]
 })

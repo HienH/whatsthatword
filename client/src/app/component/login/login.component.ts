@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit {
                 (res) => {
                     if (res["success"]) {
                         this.userService.storeUserData(res['token'])
-
                         this.router.navigate(['/home']);
 
                     } else {

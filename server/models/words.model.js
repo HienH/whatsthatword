@@ -39,3 +39,9 @@ const WordSchema = mongoose.Schema({
 });
 
 const Word = module.exports = mongoose.model('Word', WordSchema);
+
+module.exports.getWord = function (word, callback) {
+    const query = { word: word }
+    Word.findOne(query, callback);
+};
+
