@@ -16,6 +16,17 @@ export class WordService {
         });
         const body = JSON.stringify(newWord)
         return this.http.post('http://localhost:3000/word/addWord', body, { headers: headers });
+    }
 
+    getToken() {
+        return localStorage.getItem('jwt')
+    }
+
+    getAllWords() {
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            Authorization: this.getToken()
+        });
+        return this.http.get('http://localhost:3000/word/allWords', { headers: headers })
     }
 }

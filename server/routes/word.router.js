@@ -6,7 +6,6 @@ const router = express.Router();
 const wordController = require('../controller/word.controller')
 router.post('/addWord', wordController.addWord);
 
-
 router.get('/allWords', wordController.getAllWord);
 
 

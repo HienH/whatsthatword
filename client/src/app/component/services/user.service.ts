@@ -25,6 +25,7 @@ export class UserService {
         headers.append('Content-Type', 'application/json');
         return this.http.post('http://localhost:3000/user/register', user, { headers: headers });
     }
+
     isLoggedIn(): boolean {
         const helper = new JwtHelperService();
         let token = localStorage.getItem('jwt')
@@ -48,4 +49,5 @@ export class UserService {
         });
         return this.http.get('http://localhost:3000/user/profile', { headers: headers })
     }
+
 }
