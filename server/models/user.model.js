@@ -23,6 +23,10 @@ const UserSchema = mongoose.Schema({
     addedWords: [{
         type: Schema.Types.ObjectId,
         ref: 'Word'
+    }],
+    favWords: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Word'
     }]
 
 });

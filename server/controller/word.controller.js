@@ -34,3 +34,12 @@ exports.addWord = function (req, res) {
     });
 };
 
+exports.getAllWord = function (req, res) {
+
+    Word.find()
+        .then(words => res.status(200).json({
+            words: words
+        }))
+        .catch(err => res.status(400).json('Error:' + err));
+};
+

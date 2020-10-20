@@ -7,7 +7,7 @@ const wordController = require('../controller/word.controller')
 router.post('/addWord', wordController.addWord);
 
 
-// router.get('/allWords', wordController.getAllWord);
+router.get('/allWords', wordController.getAllWord);
 
 
 module.exports = router; 

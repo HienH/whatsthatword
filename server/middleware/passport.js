@@ -21,7 +21,7 @@ module.exports = function (passport) {
         //     }
         // });
 
-        User.findById({ _id: jwt_payload.user._id }).populate('addedWords')
+        User.findById({ _id: jwt_payload.user._id }).populate('addedWords').populate('favWords')
             .then(user => { return done(null, user) })
             .catch(err => { return done(null, false) });
     }));

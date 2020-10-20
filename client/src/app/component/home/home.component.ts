@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {
         this.userService.getProfile().subscribe(profile => {
-
             if (profile['success']) {
                 this.user = profile['user']
 

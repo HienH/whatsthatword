@@ -48,6 +48,4 @@ export class UserService {
         });
         return this.http.get('http://localhost:3000/user/profile', { headers: headers })
     }
-
-
 }
