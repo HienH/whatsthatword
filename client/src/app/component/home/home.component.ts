@@ -1,9 +1,10 @@
-import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener, AfterViewInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 
 import { UserService } from '../services/user.service';
 import { Word } from '../models/word.model';
 import { WordService } from '../services/word.service';
-import { MdbTableDirective } from 'angular-bootstrap-md';
+import { MdbTableDirective, MdbTablePaginationComponent } from 'angular-bootstrap-md';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
@@ -11,35 +12,40 @@ import { MdbTableDirective } from 'angular-bootstrap-md';
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
     @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
-    elements: any = [];
-    headElements = ['ID', 'First', 'Last', 'Handle'];
+    @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
+
+    allWords: any = [];
+    headElements = ['Word', 'Noun', 'Verb', 'Adjective'];
     searchText: string = '';
     previous: string;
 
     @HostListener('input') oninput() {
         this.searchItems();
     }
-    constructor(private userService: UserService, private wordService: WordService) { }
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
+    constructor(private userService: UserService, private wordService: WordService, private cdRef: ChangeDetectorRef) { }
     user: object;
     word: string;
 
     ngOnInit(): void {
-        this.wordService.getAllWords().subscribe(profile => {
-            console.log(profile)
+        this.wordService.getAllWords().subscribe(words => {
+            this.allWords = words['allWords'];
+            this.mdbTable.setDataSource(this.allWords);
+            this.previous = this.mdbTable.getDataSource();
         }, err => {
             console.log(err);
         })
+    }
 
-        for (let i = 1; i <= 10; i++) {
-            this.elements.push({
-                id: i.toString(), first: 'Wpis ' + i, last: 'Last ' + i, handle: 'Handle ' + i
-            });
-        }
-        this.mdbTable.setDataSource(this.elements);
-        this.previous = this.mdbTable.getDataSource();
+    ngAfterViewInit() {
+        this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
 
+        this.mdbTablePagination.calculateFirstItemIndex();
+        this.mdbTablePagination.calculateLastItemIndex();
+        this.cdRef.detectChanges();
     }
 
     addWord() {
@@ -57,12 +63,13 @@ export class HomeComponent implements OnInit {
     }
     searchItems() {
         const prev = this.mdbTable.getDataSource();
+        console.log(prev)
         if (!this.searchText) {
             this.mdbTable.setDataSource(this.previous);
-            this.elements = this.mdbTable.getDataSource();
+            this.allWords = this.mdbTable.getDataSource();
         }
         if (this.searchText) {
-            this.elements = this.mdbTable.searchLocalDataBy(this.searchText);
+            this.allWords = this.mdbTable.searchLocalDataBy(this.searchText);
             this.mdbTable.setDataSource(prev);
         }
     }
