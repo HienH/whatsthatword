@@ -26,6 +26,13 @@
         <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">
           {{el.word}}</th>
         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <button class="no-button-styling" (click)="favWord(el.word)">
+            <fa-icon [icon]="isFavWord(el.word)? faSolidStar : faStar"
+              [className]="isFavWord(el.word)? 'fav' : 'notfav'"></fa-icon>
+          </button>
+        </td>
+
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
           {{el.noun?.definition}}</td>
         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
           {{el.verb?.definition}}</td>

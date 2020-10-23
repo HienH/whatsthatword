@@ -2,6 +2,7 @@ const express = require('express');
 const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+const Word = require('../models/words.model');
 
 const userController = {
 
@@ -72,6 +73,29 @@ const userController = {
         res.json({
             success: true,
             user: req.user
+        });
+    },
+
+    favWord(req, res) {
+        User.getUserById({ _id: req.body.id }, (err, user) => {
+            if (err) {
+                console.log(err)
+                res.json({ success: false, message: 'API get user error' });
+            }
+            if (user) {
+                Word.getWord(req.body.word, (err, word) => {
+                    if (err) {
+                        console.log(err)
+                        res.json({ success: false, message: 'API get word error' });
+                    }
+                    user.favWords.push(word);
+                    user.save();
+                    res.json({ success: true, message: 'added fav word' });
+                });
+
+            } else {
+                res.json({ success: false, message: 'User does not exist' });
+            }
         });
     }
 }

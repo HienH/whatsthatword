@@ -15,6 +15,7 @@ import { HomeComponent } from './component/home/home.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthGuard } from './component/guard/auth.guard';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [
@@ -33,7 +34,8 @@ import { AuthGuard } from './component/guard/auth.guard';
         MDBBootstrapModule.forRoot(),
         NoopAnimationsModule,
         MatIconModule,
-        MatInputModule
+        MatInputModule,
+        FontAwesomeModule,
 
     ],
     providers: [UserService, WordService, AuthGuard],

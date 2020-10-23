@@ -9,7 +9,7 @@ exports.addWord = function (req, res) {
     Word.getWord(req.body.word, (err, word) => {
         if (err) {
             console.log(error)
-            res.json({ success: false, message: 'API save error' });
+            res.json({ success: false, message: 'API get error' });
         }
         if (!word) {
             const newWord = new Word();

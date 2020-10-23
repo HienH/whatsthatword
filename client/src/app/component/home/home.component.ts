@@ -5,7 +5,8 @@ import { Word } from '../models/word.model';
 import { WordService } from '../services/word.service';
 import { MdbTableDirective, MdbTablePaginationComponent } from 'angular-bootstrap-md';
 import { MatPaginator } from '@angular/material/paginator';
-
+import { faStar } from '@fortawesome/free-regular-svg-icons';
+import { faStar as faSolidStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-home',
@@ -17,9 +18,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
 
     allWords: any = [];
-    headElements = ['Word', 'Noun', 'Verb', 'Adjective'];
+    favWords = [];
+    headElements = ['Word', 'Fav', 'Noun', 'Verb', 'Adjective'];
     searchText: string = '';
     previous: string;
+    userId: string;
+    faStar = faStar;
+    faSolidStar = faSolidStar;
 
     @HostListener('input') oninput() {
         this.searchItems();
@@ -37,6 +42,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
             this.previous = this.mdbTable.getDataSource();
         }, err => {
             console.log(err);
+        })
+        this.getUserProfile();
+    }
+
+    getUserProfile() {
+        this.userService.getProfile().subscribe(profile => {
+            this.userId = profile['user']['_id'];
+            this.favWords = profile['user']['favWords'].map(word => { return word.word });
         })
     }
 
@@ -63,7 +76,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
     searchItems() {
         const prev = this.mdbTable.getDataSource();
-        console.log(prev)
         if (!this.searchText) {
             this.mdbTable.setDataSource(this.previous);
             this.allWords = this.mdbTable.getDataSource();
@@ -72,5 +84,25 @@ export class HomeComponent implements OnInit, AfterViewInit {
             this.allWords = this.mdbTable.searchLocalDataBy(this.searchText);
             this.mdbTable.setDataSource(prev);
         }
+    }
+
+    favWord(word) {
+        const favWord = new Word();
+        favWord.id = this.userId;
+        favWord.word = word
+        this.userService.favWord(favWord).subscribe(res => {
+            if (res['success']) {
+                this.getUserProfile()
+            }
+
+        }, err => {
+            console.log(err)
+        })
+
+
+    }
+
+    isFavWord(word) {
+        return this.favWords.includes(word)
     }
 }
