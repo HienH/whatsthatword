@@ -55,9 +55,15 @@ export class UserService {
             'Content-Type': 'application/json',
         });
         const body = JSON.stringify(favWord);
-        console.log(body)
-        console.log('body')
         return this.http.post('http://localhost:3000/user/favWord', body, { headers: headers });
     }
 
+
+    removeFavWord(favWord: Word) {
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        const body = JSON.stringify(favWord);
+        return this.http.post('http://localhost:3000/user/favWord/remove', body, { headers: headers });
+    }
 }

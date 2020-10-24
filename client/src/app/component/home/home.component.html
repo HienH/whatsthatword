@@ -22,29 +22,27 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let el of allWords; let i = index">
+      <tr *ngFor="let word of allWords; let i = index">
         <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">
-          {{el.word}}</th>
+          {{word.word}}</th>
         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-          <button class="no-button-styling" (click)="favWord(el.word)">
-            <fa-icon [icon]="isFavWord(el.word)? faSolidStar : faStar"
-              [className]="isFavWord(el.word)? 'fav' : 'notfav'"></fa-icon>
+          <button class="no-button-styling" (click)="toggleFavWord(word.word)">
+            <fa-icon [icon]="isFavWord(word.word)? faSolidStar : faStar"
+              [className]="isFavWord(word.word)? 'fav' : 'notfav'"></fa-icon>
           </button>
         </td>
-
         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-          {{el.noun?.definition}}</td>
+          {{word.noun?.definition}}</td>
         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-          {{el.verb?.definition}}</td>
+          {{word.verb?.definition}}</td>
         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-          {{el.adjective?.definition}}</td>
+          {{word.adjective?.definition}}</td>
       </tr>
     </tbody>
     <tfoot class="grey lighten-5 w-100">
       <tr>
-        <td colspan="4">
+        <td colspan="8">
           <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="allWords"></mdb-table-pagination>
-
         </td>
       </tr>
     </tfoot>

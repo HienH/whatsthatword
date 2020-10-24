@@ -11,5 +11,5 @@ router.post('/login', userController.login);
 router.get('/profile', passport.authenticate('jwt', { session: false }), userController.getUser);
 
 router.post('/favWord', userController.favWord);
-
+router.post('/favWord/remove', userController.removeFavWord);
 module.exports = router; 

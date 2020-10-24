@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         this.wordService.getAllWords().subscribe(words => {
+            console.log(words)
             this.allWords = words['allWords'];
             this.mdbTable.setDataSource(this.allWords);
             this.previous = this.mdbTable.getDataSource();
@@ -50,6 +51,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.userService.getProfile().subscribe(profile => {
             this.userId = profile['user']['_id'];
             this.favWords = profile['user']['favWords'].map(word => { return word.word });
+
         })
     }
 
@@ -63,10 +65,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     addWord() {
         const newWord = new Word();
-        newWord.id = this.user['_id'];
+        newWord.userId = this.user['_id'];
         newWord.word = this.word;
-        this.wordService.sendWord(newWord).subscribe(res => {
-            console.log(res)
+        this.wordService.addNewWord(newWord).subscribe(res => {
             if (res['success']) {
                 console.log(res)
             } err => {
@@ -86,20 +87,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
         }
     }
 
-    favWord(word) {
+    toggleFavWord(word) {
         const favWord = new Word();
-        favWord.id = this.userId;
+        favWord.userId = this.userId;
         favWord.word = word
-        this.userService.favWord(favWord).subscribe(res => {
-            if (res['success']) {
-                this.getUserProfile()
-            }
-
-        }, err => {
-            console.log(err)
-        })
-
-
+        if (this.favWords.includes(word)) {
+            this.userService.removeFavWord(favWord).subscribe(res => {
+                if (res['success']) {
+                    this.getUserProfile()
+                }
+            }, err => {
+                console.log(err)
+            })
+        } else {
+            this.userService.favWord(favWord).subscribe(res => {
+                if (res['success']) {
+                    this.getUserProfile()
+                }
+            }, err => {
+                console.log(err)
+            })
+        }
     }
 
     isFavWord(word) {

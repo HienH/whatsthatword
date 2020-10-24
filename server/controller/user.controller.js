@@ -77,7 +77,7 @@ const userController = {
     },
 
     favWord(req, res) {
-        User.getUserById({ _id: req.body.id }, (err, user) => {
+        User.getUserById({ _id: req.body.userId }, (err, user) => {
             if (err) {
                 console.log(err)
                 res.json({ success: false, message: 'API get user error' });
@@ -88,15 +88,52 @@ const userController = {
                         console.log(err)
                         res.json({ success: false, message: 'API get word error' });
                     }
-                    user.favWords.push(word);
-                    user.save();
-                    res.json({ success: true, message: 'added fav word' });
+                    if (word) {
+                        user.favWords.push(word);
+                        user.save();
+                        res.json({ success: true, message: 'added fav word' });
+                    }
+                    else {
+                        res.json({ success: false, message: 'Cannot find word' });
+                    }
                 });
 
             } else {
                 res.json({ success: false, message: 'User does not exist' });
             }
         });
+    },
+
+    removeFavWord(req, res) {
+        User.getUserById({ _id: req.body.userId }, (err, user) => {
+            if (err) {
+                console.log(err)
+                res.json({ success: false, message: 'API get user error' });
+            }
+            if (user) {
+                Word.getWord(req.body.word, (err, word) => {
+                    if (err) {
+                        console.log(err)
+                        res.json({ success: false, message: 'API get word error' });
+                    }
+                    if (word) {
+                        const wordId = word._id;
+                        const updateFavWords = user.favWords;
+                        const wordToDeleteIndex = updateFavWords.indexOf(wordId);
+                        updateFavWords.splice(wordToDeleteIndex, 1)
+                        user.favWords = updateFavWords;
+                        user.save();
+                        res.json({ success: true, message: 'Deleted fav word' });
+                    } else {
+                        res.json({ success: false, message: 'Cannot find word' });
+                    }
+                });
+
+            } else {
+                res.json({ success: false, message: 'User does not exist' });
+            }
+        });
+
     }
 }
 

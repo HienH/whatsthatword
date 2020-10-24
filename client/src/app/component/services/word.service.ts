@@ -10,7 +10,7 @@ export class WordService {
 
     constructor(private http: HttpClient) { }
 
-    sendWord(newWord: Word) {
+    addNewWord(newWord: Word) {
         let headers = new HttpHeaders({
             'Content-Type': 'application/json',
         });
