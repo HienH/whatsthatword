@@ -32,7 +32,10 @@
     <tbody>
       <tr *ngFor="let word of allWords; let i = index">
         <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">
-          {{word.word}}</th>
+
+          <a routerLink="/word/{{ word.word }}">
+            {{ word.word }}
+          </a></th>
         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
           <button class="no-button-styling" (click)="toggleFavWord(word.word)">
             <fa-icon [icon]="isFavWord(word.word)? faSolidStar : faStar"
@@ -55,4 +58,8 @@
       </tr>
     </tfoot>
   </table>
+
+  <p> <a routerLink="/me">
+      profile
+    </a></p>
 </div>

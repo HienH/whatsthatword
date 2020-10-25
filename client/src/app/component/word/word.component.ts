@@ -24,8 +24,6 @@ export class WordComponent implements OnInit {
         const url = this.router.url;
         var splitUrl = url.split('/');
         this.word = splitUrl[2];
-        console.log(splitUrl)
-
     }
 
     getWord() {
@@ -33,7 +31,6 @@ export class WordComponent implements OnInit {
             if (wordInfo['success']) {
                 this.wordDefinition = wordInfo['word']
             }
-            console.log(wordInfo);
         })
     }
 

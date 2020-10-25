@@ -9,7 +9,7 @@ const userController = require('../controller/user.controller')
 router.post('/register', userController.register);
 router.post('/login', userController.login);
 router.get('/profile', passport.authenticate('jwt', { session: false }), userController.getUser);
-
+router.get('/:friendId', userController.getFriendUser);
 router.post('/favWord', userController.favWord);
 router.post('/favWord/remove', userController.removeFavWord);
 module.exports = router; 

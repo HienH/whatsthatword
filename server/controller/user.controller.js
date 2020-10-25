@@ -134,6 +134,15 @@ const userController = {
             }
         });
 
+    },
+
+    getFriendUser(req, res) {
+        const { friendId } = req.params;
+        User.findById({ _id: friendId }).populate('addedWords').populate('favWords')
+            .then(user => {
+                res.json({ success: true, user: user });
+            })
+            .catch(err => { res.json({ success: false, message: 'API error getting user', err: err }); });
     }
 }
 
