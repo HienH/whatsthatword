@@ -8,5 +8,7 @@ router.post('/addWord', wordController.addWord);
 
 router.get('/allWords', wordController.getAllWord);
 
+// get other playlist songs
+router.get('/:word', wordController.getWord);
 
 module.exports = router; 

@@ -16,6 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthGuard } from './component/guard/auth.guard';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ProfileComponent } from './component/profile/profile.component';
+import { WordComponent } from './component/word/word.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +25,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
         LoginComponent,
         RegisterComponent,
         HomeComponent,
+        ProfileComponent,
+        WordComponent,
     ],
     imports: [
         BrowserModule,

@@ -29,4 +29,14 @@ export class WordService {
         });
         return this.http.get('http://localhost:3000/word/allWords', { headers: headers })
     }
+
+    getWordDefinition(word) {
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            Authorization: this.getToken()
+        });
+
+        return this.http.get('http://localhost:3000/word/' + word, { headers: headers })
+
+    }
 }

@@ -1,0 +1,32 @@
+<h1> {{wordDefinition?.word}}</h1>
+<div *ngIf="wordDefinition?.noun">
+  <p>Noun:
+    {{wordDefinition.noun.definition}}
+  </p>
+  <p>
+    Example:
+    {{wordDefinition.noun.example}}
+  </p>
+</div>
+<div *ngIf="wordDefinition?.adjective">
+  <p>Adjective:
+    {{wordDefinition.adjective.definition}}
+  </p>
+  <p>
+    Example:
+    {{wordDefinition.adjective.example}}
+  </p>
+</div>
+<div *ngIf="wordDefinition?.verb">
+  <p>Verb:
+    {{wordDefinition.verb.definition}}
+  </p>
+  <p>
+    Example:
+    {{wordDefinition.verb.example}}
+  </p>
+</div>
+
+<button (click)="back()">
+  Back
+</button>

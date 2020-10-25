@@ -15,7 +15,7 @@ exports.addWord = function (req, res) {
             const newWord = new Word();
             newWord.word = req.body.word
             getDefinition(req.body.word, newWord)
-            User.getUserById({ _id: req.body.id }, (err, user) => {
+            User.getUserById({ _id: req.body.userId }, (err, user) => {
                 if (err) {
                     console.log(err)
                     res.json({ success: false, message: 'API save error' });
@@ -69,4 +69,19 @@ async function getDefinition(word, newWord) {
         }
         return newWord.save();
     }
+};
+
+exports.getWord = function (req, res) {
+    console.log(req.params.word)
+    Word.getWord(req.params.word, (err, word) => {
+        if (err) {
+            console.log(error)
+            res.json({ success: false, message: 'API get error' });
+        }
+        if (!word) {
+            res.json({ success: false, message: 'Cannot find word' });
+        } else {
+            res.json({ success: true, 'word': word });
+        }
+    });
 }

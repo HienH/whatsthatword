@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Hello {{user?.name}}</h1>
+  <div class="row">
+    <div class="col-6">
+      <h4>
+        Favourite words
+      </h4>
+      <li *ngFor="let favWord of user?.favWords">
+        <a routerLink="/word/{{ favWord.word }}">
+          {{ favWord.word }}
+        </a>
+      </li>
+    </div>
+    <div class=" col-6">
+      <h4>
+        Added added
+      </h4>
+      <li *ngFor="let addedWord of user?.addedWords">
+        <a routerLink="/word/{{ addedWord.word }}">
+          {{ addedWord.word }}
+        </a>
+      </li>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,20 @@
-<!-- <input class="form-control" type="word" name="word" [(ngModel)]="word" class="form-control mb-4" placeholder="Word">
-
-<button (click)="addWord()" class="btn btn-danger">
-  Add
-</button> -->
-
 <div class="container">
+  <h1> WHATS THAT WORD</h1>
+  <div class="row">
+    <div class="col-9">
+      <input class="form-control" type="word" name="word" [(ngModel)]="word" class="form-control mb-4"
+        placeholder="Word" />
+    </div>
+    <div class="col-3">
+      <button (click)="addWord()" class="btn btn-danger">
+        Add
+      </button>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-12 mx-auto">
+      <h1>All Words</h1>
       <div class="md-form">
         <input type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput />
         <label for="search">Search</label>

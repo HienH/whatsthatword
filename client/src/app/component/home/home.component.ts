@@ -36,15 +36,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
     word: string;
 
     ngOnInit(): void {
+        this.getAllWords();
+        this.getUserProfile();
+    }
+
+    getAllWords() {
+        console.log('calledgetWords')
         this.wordService.getAllWords().subscribe(words => {
-            console.log(words)
             this.allWords = words['allWords'];
             this.mdbTable.setDataSource(this.allWords);
             this.previous = this.mdbTable.getDataSource();
         }, err => {
             console.log(err);
         })
-        this.getUserProfile();
     }
 
     getUserProfile() {
@@ -56,8 +60,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
+        console.log('Afterview')
         this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
-
         this.mdbTablePagination.calculateFirstItemIndex();
         this.mdbTablePagination.calculateLastItemIndex();
         this.cdRef.detectChanges();
@@ -65,15 +69,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     addWord() {
         const newWord = new Word();
-        newWord.userId = this.user['_id'];
+        newWord.userId = this.userId;
         newWord.word = this.word;
         this.wordService.addNewWord(newWord).subscribe(res => {
             if (res['success']) {
-                console.log(res)
+
             } err => {
                 console.log(err)
             }
         })
+        this.getAllWords();
     }
     searchItems() {
         const prev = this.mdbTable.getDataSource();
