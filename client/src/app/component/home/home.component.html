@@ -32,7 +32,6 @@
     <tbody>
       <tr *ngFor="let word of allWords; let i = index">
         <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">
-
           <a routerLink="/word/{{ word.word }}">
             {{ word.word }}
           </a></th>
@@ -59,7 +58,15 @@
     </tfoot>
   </table>
 
-  <p> <a routerLink="/me">
-      profile
-    </a></p>
+  <div *ngFor="let user of allUsers">
+    <a [routerLink]="['/profile', user.userId]">
+      <div *ngIf="isOwnProfile(user)">
+        profile
+      </div>
+      <div *ngIf="!isOwnProfile(user)">
+        {{user.username}}
+      </div>
+    </a>
+  </div>
+
 </div>

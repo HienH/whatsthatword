@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
     @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
 
+    allUsers: any = [];
     allWords: any = [];
     favWords = [];
     headElements = ['Word', 'Fav', 'Noun', 'Verb', 'Adjective'];
@@ -38,10 +39,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         this.getAllWords();
         this.getUserProfile();
+        this.getAlLUser();
     }
 
     getAllWords() {
-        console.log('calledgetWords')
         this.wordService.getAllWords().subscribe(words => {
             this.allWords = words['allWords'];
             this.mdbTable.setDataSource(this.allWords);
@@ -60,7 +61,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        console.log('Afterview')
         this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
         this.mdbTablePagination.calculateFirstItemIndex();
         this.mdbTablePagination.calculateLastItemIndex();
@@ -117,5 +117,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     isFavWord(word) {
         return this.favWords.includes(word)
+    }
+
+    getAlLUser() {
+        this.userService.getAllUser().subscribe(users => {
+            this.allUsers = users;
+        }, err => {
+            console.log(err)
+        })
+    }
+
+    isOwnProfile(user) {
+        return user.userId === this.userId
     }
 }

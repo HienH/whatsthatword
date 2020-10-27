@@ -11,4 +11,5 @@ router.get('/allWords', wordController.getAllWord);
 // get other playlist songs
 router.get('/:word', wordController.getWord);
 
-module.exports = router; 
+module.exports = router;
+

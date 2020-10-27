@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { IUser } from '../models/user.model';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
@@ -8,17 +10,26 @@ import { IUser } from '../models/user.model';
 })
 export class ProfileComponent implements OnInit {
     user: IUser;
-    favWords = [];
-    constructor(private userService: UserService) { }
+    id: string;
+
+    constructor(private userService: UserService, private route: ActivatedRoute) { }
 
     ngOnInit(): void {
-        this.getUserProfile();
+        this.getUserId();
+        if (this.id) {
+            this.getUserDetails(this.id);
+        }
     }
 
-    getUserProfile() {
-        this.userService.getProfile().subscribe(profile => {
+    getUserId() {
+        this.route.params.subscribe(params => {
+            this.id = params['userId'];
+
+        });
+    }
+    getUserDetails(id) {
+        this.userService.getUsersProfile(id).subscribe(profile => {
             this.user = profile['user'];
-            this.favWords = profile['user']['favWords'];
         })
     }
 

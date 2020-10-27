@@ -47,7 +47,15 @@ export class UserService {
             'Content-Type': 'application/json',
             Authorization: this.getToken()
         });
-        return this.http.get('http://localhost:3000/user/profile', { headers: headers })
+        return this.http.get('http://localhost:3000/user/profile/', { headers: headers })
+    }
+
+    getUsersProfile(userId) {
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            Authorization: this.getToken()
+        });
+        return this.http.get('http://localhost:3000/user/profile/' + userId, { headers: headers })
     }
 
     favWord(favWord: Word) {
@@ -66,4 +74,13 @@ export class UserService {
         const body = JSON.stringify(favWord);
         return this.http.post('http://localhost:3000/user/favWord/remove', body, { headers: headers });
     }
+
+    getAllUser() {
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            Authorization: this.getToken()
+        });
+        return this.http.get('http://localhost:3000/user/allUsers', { headers: headers })
+    }
+
 }

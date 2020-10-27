@@ -69,11 +69,20 @@ const userController = {
         })
     },
 
-    getUser(req, res) {
+    getProfile(req, res) {
         res.json({
             success: true,
             user: req.user
         });
+    },
+
+    getUserProfile(req, res) {
+        const userId = req.params.userId
+        User.findById({ _id: userId }).populate('addedWords').populate('favWords')
+            .then(user => {
+                res.status(200).json({ success: true, user: user });
+            })
+            .catch(err => { res.json({ success: false, message: 'API error getting user', err: err }); })
     },
 
     favWord(req, res) {
@@ -91,7 +100,7 @@ const userController = {
                     if (word) {
                         user.favWords.push(word);
                         user.save();
-                        res.json({ success: true, message: 'added fav word' });
+                        res.status(200).json({ success: true, message: 'added fav word' });
                     }
                     else {
                         res.json({ success: false, message: 'Cannot find word' });
@@ -123,7 +132,7 @@ const userController = {
                         updateFavWords.splice(wordToDeleteIndex, 1)
                         user.favWords = updateFavWords;
                         user.save();
-                        res.json({ success: true, message: 'Deleted fav word' });
+                        res.status(200).json({ success: true, message: 'Deleted fav word' });
                     } else {
                         res.json({ success: false, message: 'Cannot find word' });
                     }
@@ -140,9 +149,31 @@ const userController = {
         const { friendId } = req.params;
         User.findById({ _id: friendId }).populate('addedWords').populate('favWords')
             .then(user => {
-                res.json({ success: true, user: user });
+                res.status(200).json({ success: true, user: user });
             })
             .catch(err => { res.json({ success: false, message: 'API error getting user', err: err }); });
+    },
+
+    getAllUser(req, res) {
+        console.log('gettingaLL');
+        User.find({}, function (err, users) {
+            if (err) {
+                console.log(err)
+                res.status(500).json({ success: false, message: 'API get user error' });
+            }
+            else {
+                var userMap = [];
+                console.log(users)
+                users.forEach(function (user) {
+                    userMap.push({
+                        userId: user._id,
+                        username: user.username
+                    })
+                });
+
+                res.send(userMap);
+            }
+        });
     }
 }
 
