@@ -25,7 +25,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //Set static folder -- !IMPORTANT
-app.use(express.static(path.join(__dirname, './public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Routers
 const userRouter = require('./server/routes/user.router');
@@ -40,7 +40,7 @@ app.use('/user', userRouter);
 app.use('/word', wordRouter);
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'))
+    res.sendFile(path.join(__dirname, 'public/index.html'))
 })
 
 app.listen(port, () => {
