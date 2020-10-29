@@ -1,72 +1,69 @@
-<div class="container">
-  <h1> WHATS THAT WORD</h1>
+<div class="backgroundImage">
   <div class="row">
-    <div class="col-9">
-      <input class="form-control" type="word" name="word" [(ngModel)]="word" class="form-control mb-4"
-        placeholder="Word" />
-    </div>
-    <div class="col-3">
-      <button (click)="addWord()" class="btn btn-danger">
-        Add
-      </button>
-    </div>
-  </div>
+    <div class="col-6 parent">
 
-  <div class="row">
-    <div class="col-md-12 mx-auto">
-      <h1>All Words</h1>
-      <div class="md-form">
-        <input type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput />
-        <label for="search">Search</label>
+      <div class="table-wrapper">
+        <div class="md-form margin-bottom-10">
+          <input type="text" [(ngModel)]="searchText" class="form-control margin-left-15" id="search" mdbInput />
+          <label class="margin-left-15" for="search"> Search</label>
+        </div>
+        <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+          <thead>
+            <tr>
+              <th *ngFor="let head of headElements; let i = index" scope="col">
+                {{head}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let word of allWords; let i = index">
+              <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">
+                <a routerLink="/word/{{ word.word }}">
+                  {{ word.word }}
+                </a></th>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                <button class="no-button-styling" (click)="toggleFavWord(word.word)">
+                  <fa-icon [icon]="isFavWord(word.word)? faSolidStar : faStar"
+                    [className]="isFavWord(word.word)? 'fav' : 'notfav'"></fa-icon>
+                </button>
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{word.noun?.definition}}</td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{word.verb?.definition}}</td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{word.adjective?.definition}}</td>
+            </tr>
+            <tr *ngIf="allWords.length == 0">
+              <td> Oh no, no words have been added to your word index </td>
+            </tr>
+          </tbody>
+          <tfoot class="grey lighten-5 w-100">
+            <tr>
+              <td colspan="8">
+                <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="allWords"></mdb-table-pagination>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+
       </div>
     </div>
-  </div>
-  <table mdbTable #tableEl="mdbTable" class="z-depth-1">
-    <thead>
-      <tr>
-        <th *ngFor="let head of headElements; let i = index" scope="col">
-          {{head}}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let word of allWords; let i = index">
-        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">
-          <a routerLink="/word/{{ word.word }}">
-            {{ word.word }}
-          </a></th>
-        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-          <button class="no-button-styling" (click)="toggleFavWord(word.word)">
-            <fa-icon [icon]="isFavWord(word.word)? faSolidStar : faStar"
-              [className]="isFavWord(word.word)? 'fav' : 'notfav'"></fa-icon>
+    <div class="col-6 redColor">
+      <div class="right-parent">
+        <div class="position-center">
+          <a class="random-word" routerLink="/word/{{randomWord}}">
+            {{ randomWord }}
+          </a>
+        </div>
+        <div class="wrapper">
+          <input type="word" name="word" [(ngModel)]="word" class="form-control addInput" placeholder="Add a Word" />
+          <button (click)="addWord()" class="btn no-button-styling addButton">
+
           </button>
-        </td>
-        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-          {{word.noun?.definition}}</td>
-        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-          {{word.verb?.definition}}</td>
-        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-          {{word.adjective?.definition}}</td>
-      </tr>
-    </tbody>
-    <tfoot class="grey lighten-5 w-100">
-      <tr>
-        <td colspan="8">
-          <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="allWords"></mdb-table-pagination>
-        </td>
-      </tr>
-    </tfoot>
-  </table>
-
-  <div *ngFor="let user of allUsers">
-    <a [routerLink]="['/profile', user.userId]">
-      <div *ngIf="isOwnProfile(user)">
-        profile
+        </div>
       </div>
-      <div *ngIf="!isOwnProfile(user)">
-        {{user.username}}
-      </div>
-    </a>
+    </div>
   </div>
 
 </div>

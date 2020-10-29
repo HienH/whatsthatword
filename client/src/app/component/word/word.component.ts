@@ -38,4 +38,6 @@ export class WordComponent implements OnInit {
         this.location.back();
     }
 
+
+
 }

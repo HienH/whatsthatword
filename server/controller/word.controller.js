@@ -72,7 +72,7 @@ async function getDefinition(word, newWord) {
 };
 
 exports.getWord = function (req, res) {
-    console.log(req.params.word)
+  
     Word.getWord(req.params.word, (err, word) => {
         if (err) {
             console.log(error)

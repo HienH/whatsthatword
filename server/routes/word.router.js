@@ -12,4 +12,3 @@ router.get('/allWords', wordController.getAllWord);
 router.get('/:word', wordController.getWord);
 
 module.exports = router;
-

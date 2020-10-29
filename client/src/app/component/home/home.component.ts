@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     searchText: string = '';
     previous: string;
     userId: string;
+    randomWord: string;
     faStar = faStar;
     faSolidStar = faSolidStar;
 
@@ -47,9 +48,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
             this.allWords = words['allWords'];
             this.mdbTable.setDataSource(this.allWords);
             this.previous = this.mdbTable.getDataSource();
+            this.getRandomWord()
         }, err => {
             console.log(err);
         })
+    }
+
+    getRandomWord() {
+        const max = this.allWords.length;
+        const randomNumber = Math.floor(Math.random() * max + 1);
+        this.randomWord = this.allWords[randomNumber]['word'];
     }
 
     getUserProfile() {
@@ -61,7 +69,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
+        this.mdbTablePagination.setMaxVisibleItemsNumberTo(3);
         this.mdbTablePagination.calculateFirstItemIndex();
         this.mdbTablePagination.calculateLastItemIndex();
         this.cdRef.detectChanges();
@@ -73,7 +81,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         newWord.word = this.word;
         this.wordService.addNewWord(newWord).subscribe(res => {
             if (res['success']) {
-
+                window.location.reload();
             } err => {
                 console.log(err)
             }
@@ -99,7 +107,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
         if (this.favWords.includes(word)) {
             this.userService.removeFavWord(favWord).subscribe(res => {
                 if (res['success']) {
-                    this.getUserProfile()
                 }
             }, err => {
                 console.log(err)
