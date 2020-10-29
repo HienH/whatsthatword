@@ -155,7 +155,6 @@ const userController = {
     },
 
     getAllUser(req, res) {
-        console.log('gettingaLL');
         User.find({}, function (err, users) {
             if (err) {
                 console.log(err)
@@ -163,7 +162,6 @@ const userController = {
             }
             else {
                 var userMap = [];
-                console.log(users)
                 users.forEach(function (user) {
                     userMap.push({
                         userId: user._id,
