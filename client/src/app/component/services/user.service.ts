@@ -13,7 +13,7 @@ export class UserService {
     loginUser(user) {
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3000/user/login', user, { headers: headers });
+        return this.http.post('/user/login', user, { headers: headers });
     }
 
     storeUserData(token) {
@@ -23,7 +23,7 @@ export class UserService {
     registerUser(user) {
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3000/user/register', user, { headers: headers });
+        return this.http.post('/user/register', user, { headers: headers });
     }
 
     isLoggedIn(): boolean {
@@ -47,7 +47,7 @@ export class UserService {
             'Content-Type': 'application/json',
             Authorization: this.getToken()
         });
-        return this.http.get('http://localhost:3000/user/profile/', { headers: headers })
+        return this.http.get('/user/profile/', { headers: headers })
     }
 
     getUsersProfile(userId) {
@@ -55,7 +55,7 @@ export class UserService {
             'Content-Type': 'application/json',
             Authorization: this.getToken()
         });
-        return this.http.get('http://localhost:3000/user/profile/' + userId, { headers: headers })
+        return this.http.get('/user/profile/' + userId, { headers: headers })
     }
 
     favWord(favWord: Word) {
@@ -63,7 +63,7 @@ export class UserService {
             'Content-Type': 'application/json',
         });
         const body = JSON.stringify(favWord);
-        return this.http.post('http://localhost:3000/user/favWord', body, { headers: headers });
+        return this.http.post('/user/favWord', body, { headers: headers });
     }
 
 
@@ -72,7 +72,7 @@ export class UserService {
             'Content-Type': 'application/json',
         });
         const body = JSON.stringify(favWord);
-        return this.http.post('http://localhost:3000/user/favWord/remove', body, { headers: headers });
+        return this.http.post('/user/favWord/remove', body, { headers: headers });
     }
 
     getAllUser() {
@@ -80,7 +80,7 @@ export class UserService {
             'Content-Type': 'application/json',
             Authorization: this.getToken()
         });
-        return this.http.get('http://localhost:3000/user/allUsers', { headers: headers })
+        return this.http.get('/user/allUsers', { headers: headers })
     }
 
 }

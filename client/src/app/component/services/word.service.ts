@@ -15,7 +15,7 @@ export class WordService {
             'Content-Type': 'application/json',
         });
         const body = JSON.stringify(newWord)
-        return this.http.post('http://localhost:3000/word/addWord', body, { headers: headers });
+        return this.http.post('/word/addWord', body, { headers: headers });
     }
 
     getToken() {
@@ -27,7 +27,7 @@ export class WordService {
             'Content-Type': 'application/json',
             Authorization: this.getToken()
         });
-        return this.http.get('http://localhost:3000/word/allWords', { headers: headers })
+        return this.http.get('/word/allWords', { headers: headers })
     }
 
     getWordDefinition(word) {
@@ -36,7 +36,7 @@ export class WordService {
             Authorization: this.getToken()
         });
 
-        return this.http.get('http://localhost:3000/word/' + word, { headers: headers })
+        return this.http.get('/word/' + word, { headers: headers })
 
     }
 }
