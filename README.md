@@ -6,6 +6,6 @@ Created using MEAN Stack, deployed using Heroku
 
 http://whats-that-word-pokemon-ed.herokuapp.com/register
 
-(./photos/wordIndex.png)
-(./photos/wordIndex-2.png)
-(./photos/wordIndex-3.png)
+![word-dex](./photos/wordIndex.png)
+![info-card](./photos/wordIndex-2.png)
+![login](./photos/wordIndex-3.png)
