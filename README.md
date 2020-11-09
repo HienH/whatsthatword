@@ -5,3 +5,7 @@ Word-dex is a play on pokédex but for word. It allows you to identify and favou
 Created using MEAN Stack, deployed using Heroku
 
 http://whats-that-word-pokemon-ed.herokuapp.com/register
+
+(./photos/wordIndex.png)
+(./photos/wordIndex-2.png)
+(./photos/wordIndex-3.png)
